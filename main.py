@@ -14,8 +14,7 @@ Base = declarative_base()
 app = Flask(__name__)
 # app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
-ckeditor = CKEditor(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 Bootstrap(app)
 
 login_manager = LoginManager()
@@ -46,6 +45,7 @@ class BlogPost(db.Model, Base):
     title = db.Column(db.String(250), nullable=False)
     body = db.Column(db.Text(), nullable=False)
     img_url = db.Column(db.String(250), nullable=False)
+
 
 
 def admin(func):
